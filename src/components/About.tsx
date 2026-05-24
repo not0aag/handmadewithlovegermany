@@ -25,12 +25,6 @@ export default function About() {
           </motion.div>
 
           <div className="pt-4">
-            <motion.p
-              initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-script text-3xl text-[var(--color-primary)] mb-4 leading-none"
-            >
-              Hi, I am Sandra
-            </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
               className="font-display font-semibold text-4xl md:text-5xl tracking-[-0.02em] text-[var(--color-text)] mb-8 leading-[1.1]"

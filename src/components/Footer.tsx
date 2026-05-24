@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -15,10 +16,14 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-10">
           {/* Brand */}
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <p className="font-script text-[1.875rem] text-[var(--color-primary)] leading-none">
-              Sandra
-            </p>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <Image
+              src="/images/instagram/logo.jpg"
+              alt="Made with Love"
+              width={56}
+              height={56}
+              className="rounded-full"
+            />
             <p className="label-overline">Handmade gifts &nbsp;·&nbsp; Germany</p>
           </div>
 

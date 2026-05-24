@@ -52,7 +52,6 @@ export default function Gallery() {
             className="font-body font-light mt-4 text-sm text-[var(--color-text-muted)] tracking-wide"
           >
             Every piece you see here was made by hand, for a real person.
-            Drag to rearrange · click to expand.
           </motion.p>
         </div>
 

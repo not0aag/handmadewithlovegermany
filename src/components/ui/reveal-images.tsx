@@ -43,22 +43,22 @@ function RevealImageList({ items }: RevealImageListProps) {
     {
       text: "Bouquets",
       images: [
-        { src: "https://images.unsplash.com/photo-1490750967868-88df5691cc62?w=200&h=200&fit=crop&q=80", alt: "Flower bouquet" },
-        { src: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=200&h=200&fit=crop&q=80", alt: "Rose arrangement" },
+        { src: "/images/instagram/1.jpeg", alt: "Rose gift box" },
+        { src: "/images/instagram/6.jpg",  alt: "Flowers and chocolates" },
       ],
     },
     {
       text: "Hampers",
       images: [
-        { src: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&h=200&fit=crop&q=80", alt: "Gift hamper" },
-        { src: "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=200&h=200&fit=crop&q=80", alt: "Gift arrangement" },
+        { src: "/images/instagram/2.jpeg", alt: "Garden hamper" },
+        { src: "/images/instagram/3.jpg",  alt: "Pink balloon basket" },
       ],
     },
     {
       text: "Albums",
       images: [
-        { src: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=200&h=200&fit=crop&q=80", alt: "Photo album" },
-        { src: "https://images.unsplash.com/photo-1487530811015-780f2f2c0806?w=200&h=200&fit=crop&q=80", alt: "Floral frame" },
+        { src: "/images/instagram/5.jpg",  alt: "Roses and wellness hamper with photos" },
+        { src: "/images/instagram/7.jpg",  alt: "Heart shaped gift box" },
       ],
     },
   ];
