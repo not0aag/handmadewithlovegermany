@@ -1,26 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ── Design tokens ────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary:              #C8967E;
+  --color-primary-light:        #D4A99A;
+  --color-primary-dark:         #A0705A;
+  --color-accent:               #F2C4CE;
+  --color-accent-soft:          #F9E4EA;
+  --color-cream:                #FDF6F0;
+  --color-text:                 #2A1A14;
+  --color-text-muted:           #7A5C52;
+  --color-border:               #E8D0C8;
+  --color-background:           #FDF6F0;
+  --color-foreground:           #2A1A14;
+  --color-primary-foreground:   #ffffff;
+  --color-secondary:            #F9E4EA;
+  --color-secondary-foreground: #A0705A;
+  --color-muted:                #F9E4EA;
+  --color-muted-foreground:     #7A5C52;
+  --color-accent-foreground:    #2A1A14;
+  --color-destructive:          #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-input:                #E8D0C8;
+  --color-ring:                 #C8967E;
+
+  /* Two fonts only — no cursive fallback risk */
+  --font-display: 'Cormorant', Georgia, serif;
+  --font-body:    'Jost', system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FDF6F0; --foreground: #2A1A14;
+  --primary: #C8967E;    --primary-foreground: #ffffff;
+  --secondary: #F9E4EA;  --secondary-foreground: #A0705A;
+  --muted: #F9E4EA;      --muted-foreground: #7A5C52;
+  --accent: #F2C4CE;     --accent-foreground: #2A1A14;
+  --destructive: #ef4444; --destructive-foreground: #ffffff;
+  --border: #E8D0C8; --input: #E8D0C8; --ring: #C8967E;
 }
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+/* ── Typography classes ───────────────────────────────────────────────────── */
+
+/* Display: Cormorant serif — for all headlines */
+.font-display { font-family: var(--font-display); }
+
+/* Body: Jost geometric — for all copy, UI, labels */
+.font-body    { font-family: var(--font-body); }
+
+/* Script-style labels: Cormorant italic — NO cursive fallback = NO Comic Sans */
+.font-script  {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* Thin uppercase tracking label — used throughout for overlines */
+.label-overline {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Component helpers ────────────────────────────────────────────────────── */
+.card-shadow       { box-shadow: 0 4px 32px rgba(160,112,90,0.10); }
+.card-shadow-hover { box-shadow: 0 16px 48px rgba(160,112,90,0.18); }
