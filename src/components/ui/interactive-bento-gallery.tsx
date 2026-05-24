@@ -91,41 +91,55 @@ interface GalleryModalProps {
 
 const GalleryModal = ({ selectedItem, isOpen, onClose, setSelectedItem, mediaItems }: GalleryModalProps) => {
   const [dockPosition, setDockPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    if (isOpen) window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <>
+      {/* Backdrop — click anywhere outside image to close */}
       <motion.div
-        initial={{ scale: 0.98 }} animate={{ scale: 1 }} exit={{ scale: 0.98 }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Modal content */}
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className="fixed inset-0 w-full min-h-screen sm:h-[90vh] md:h-[600px] backdrop-blur-lg rounded-none sm:rounded-lg md:rounded-xl overflow-hidden z-10"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 pointer-events-none"
       >
-        <div className="h-full flex flex-col">
-          <div className="flex-1 p-2 sm:p-3 md:p-4 flex items-center justify-center bg-[var(--color-cream)]/50">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedItem.id}
-                className="relative w-full aspect-[16/9] max-w-[95%] sm:max-w-[85%] md:max-w-3xl h-auto max-h-[70vh] rounded-lg overflow-hidden shadow-md"
-                initial={{ y: 20, scale: 0.97 }}
-                animate={{ y: 0, scale: 1, transition: { type: "spring", stiffness: 500, damping: 30, mass: 0.5 } }}
-                exit={{ y: 20, scale: 0.97, transition: { duration: 0.15 } }}
-                onClick={onClose}
-              >
-                <MediaItem item={selectedItem} className="w-full h-full object-contain bg-[var(--color-cream)]" onClick={onClose} />
-                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 md:p-4 bg-gradient-to-t from-black/50 to-transparent">
-                  <h3 className="text-white text-base sm:text-lg md:text-xl font-semibold">{selectedItem.title}</h3>
-                  <p className="text-white/80 text-xs sm:text-sm mt-1">{selectedItem.desc}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+        {/* Close button */}
         <motion.button
-          className="absolute top-2 sm:top-2.5 md:top-3 right-2 sm:right-2.5 md:right-3 p-2 rounded-full bg-[var(--color-accent-soft)] text-[var(--color-primary-dark)] hover:bg-[var(--color-accent)] text-xs sm:text-sm backdrop-blur-sm"
+          className="pointer-events-auto absolute top-4 right-4 w-11 h-11 rounded-full bg-white text-[var(--color-text)] flex items-center justify-center shadow-lg hover:bg-[var(--color-accent-soft)] transition-colors"
           onClick={onClose} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+          aria-label="Close"
         >
-          <X className="w-3 h-3" />
+          <X className="w-5 h-5" />
         </motion.button>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedItem.id}
+            className="pointer-events-auto relative max-w-2xl w-full max-h-[80vh] rounded-2xl overflow-hidden shadow-2xl"
+            initial={{ y: 20, scale: 0.97 }}
+            animate={{ y: 0, scale: 1, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+            exit={{ y: 20, scale: 0.97, transition: { duration: 0.15 } }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <MediaItem item={selectedItem} className="w-full h-full object-contain bg-[var(--color-cream)]" />
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+              <h3 className="text-white text-lg font-semibold">{selectedItem.title}</h3>
+              <p className="text-white/80 text-sm mt-1">{selectedItem.desc}</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
 
       <motion.div
